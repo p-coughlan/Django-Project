@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    """
-    This is the view that will be called when the user visits the root URL of the site.
-    """
-    return HttpResponse("Hello, world!")
+    if request.method == "POST":
+        return HttpResponse("You must have POSTed something")
+    else:
+        return HttpResponse(request.method)
