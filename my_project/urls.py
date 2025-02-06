@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from hello_world import views as index_views # Import the views module from the hello_world app using the alias index_views.
+from about import views as about_views # Import the views module from the about app using the alias about_views.
 
 urlpatterns = [
-    path('', index_views.index, name='index'), # Add a URL pattern to the urlpatterns list that maps the root URL of the site to the index view.
-    path('admin/', admin.site.urls),
+    path('hello/', index_views.index, name='index'), # Add a URL pattern to the urlpatterns list that maps the root URL of the site to the index view.
+    path('about/', about_views.about_me, name='about'), # Add a URL pattern to the urlpatterns list that maps the /about URL of the site to the about_me view.
+    path('admin/', admin.site.urls), # Why is this at the end? Because Django will check each URL pattern in the order they are defined in the urlpatterns list. If the admin URL pattern was defined before the hello/ and about/ URL patterns, Django would never reach the hello/ and about/ URL patterns because the admin URL pattern would match first.
 ]
